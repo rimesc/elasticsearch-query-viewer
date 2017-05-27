@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+
+  query: any;
+
+  update(query: any) {
+    console.log('updated');
+    this.query = query;
+  }
 }
