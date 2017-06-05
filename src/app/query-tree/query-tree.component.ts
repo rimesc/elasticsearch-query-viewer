@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 
 import { TreeNode } from 'angular-tree-component';
 
-import { parseQuery } from '../query-parser/query-parser';
+import { parse } from '../query-parser/query-parser';
 
 @Component({
   selector: 'app-query-tree',
@@ -13,9 +13,23 @@ export class QueryTreeComponent {
 
   nodes: any[];
 
+  error: string;
+
   @Input()
   set query(query: any) {
-    this.nodes = parseQuery(query);
+    if (query) {
+      try {
+        const rootNode = parse(query);
+        if (rootNode) {
+          this.nodes = [rootNode];
+          this.error = null;
+        }
+      } catch (error) {
+        this.nodes = null;
+        this.error = error;
+      }
+    }
+  }
   }
 
 }
