@@ -9,7 +9,7 @@ export interface Query {
 export function match(field: string, value: string, metadata?: any): Query {
   return {
     id: field,
-    name: `'${field}' matches ' ${value}'`,
+    name: `'${field}' matches '${value}'`,
     children: [],
     metadata: metadata,
     isExpanded: false
