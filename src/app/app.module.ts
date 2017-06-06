@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TreeModule } from 'angular-tree-component';
 
 import { AppComponent } from './app.component';
@@ -19,7 +20,8 @@ import { QueryInputComponent } from './query-input/query-input.component';
     BrowserModule,
     FormsModule,
     HttpModule,
-    TreeModule
+    TreeModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

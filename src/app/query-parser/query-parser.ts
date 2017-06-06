@@ -72,12 +72,12 @@ function flatten(a: Object[], b: Object[]): Object[] {
 function parseMatch(query: Object): Query {
   const field = Object.getOwnPropertyNames(query)[0];
   let value: string;
-  const metadata = {};
+  let metadata = [];
   if (field && typeof query[field] === 'string') {
     value = query[field];
   } else if (field && query[field].hasOwnProperty('query')) {
     value = query[field]['query'];
-    Object.getOwnPropertyNames(query[field]).filter(k => k !== 'query').forEach(k => metadata[k] = query[field][k]);
+    metadata = Object.getOwnPropertyNames(query[field]).filter(k => k !== 'query').map(k => ({key: k, value: query[field][k]}));
   } else {
     throw SyntaxError('Malformed match clause');
   }

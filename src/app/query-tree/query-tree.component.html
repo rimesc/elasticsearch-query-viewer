@@ -1,7 +1,12 @@
-<tree-root *ngIf="nodes" [nodes]="nodes" (activate)="selected($event)" (deactivate)="deselected($event)"></tree-root>
+<tree-root *ngIf="nodes" [nodes]="nodes">
   <ng-template #treeNodeTemplate let-node let-index="index">
+    <ng-template #popContent>
+      <span class="badge badge-default badge-pill">{{node.data.type}}</span>
+      <table><tr *ngFor="let item of node.data.metadata"><th>{{item.key}}:</th><td>{{item.value}}</td></tr></table>
+    </ng-template>
     <small><span class="badge badge-default badge-pill">{{node.data.type}}</span></small>
-    <span>{{node.data.name}}</span>
+    <span *ngIf="node.data.metadata" [ngbPopover]="popContent" triggers="mouseenter:mouseleave" container="body">{{node.data.name}}</span>
+    <span *ngIf="!node.data.metadata">{{node.data.name}}</span>
   </ng-template>
 </tree-root>
 <p *ngIf="error" class="text-danger">{{error}}</p>
