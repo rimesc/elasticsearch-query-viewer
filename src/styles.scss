@@ -1,0 +1,12 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+body {
+  padding-top: 2rem;
+}
+
+.query-badge {
+  @extend .badge;
+  @extend .badge-default;
+  @extend .badge-pill;
+  opacity: 0.33;
+}

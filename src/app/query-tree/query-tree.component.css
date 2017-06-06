@@ -34,7 +34,3 @@
 :host /deep/ .toggle-children {
   z-index: 1;
 }
-
-:host /deep/ tree-node .badge {
-  opacity: 0.33;
-}
