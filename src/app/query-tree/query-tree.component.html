@@ -1,2 +1,7 @@
 <tree-root *ngIf="nodes" [nodes]="nodes" (activate)="selected($event)" (deactivate)="deselected($event)"></tree-root>
+  <ng-template #treeNodeTemplate let-node let-index="index">
+    <small><span class="badge badge-default badge-pill">{{node.data.type}}</span></small>
+    <span>{{node.data.name}}</span>
+  </ng-template>
+</tree-root>
 <p *ngIf="error" class="text-danger">{{error}}</p>
