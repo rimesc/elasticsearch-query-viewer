@@ -1,0 +1,14 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+:host /deep/ .tree-children {
+  border-left: 1px solid $gray-lighter;
+  // border-bottom: 1px solid $gray-lighter;
+  margin-left: 5px;
+}
+
+.query-badge {
+  @extend .badge;
+  @extend .badge-default;
+  @extend .badge-pill;
+  opacity: 0.33;
+}

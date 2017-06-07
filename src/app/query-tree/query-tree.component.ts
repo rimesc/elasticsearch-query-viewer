@@ -7,7 +7,7 @@ import { parse } from '../query-parser/query-parser';
 @Component({
   selector: 'app-query-tree',
   templateUrl: './query-tree.component.html',
-  styleUrls: ['./query-tree.component.css']
+  styleUrls: ['./query-tree.component.scss']
 })
 export class QueryTreeComponent {
 
