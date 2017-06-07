@@ -23,8 +23,12 @@ function parseQuery(query: Object): Query {
     case 'nested':
       return parseNested(query['nested']);
     default:
-      console.log(`Ignoring unsupported clause of type ${queryType}`);
-      return null;
+      if (query[queryType] instanceof Object) {
+        console.log(`Ignoring unsupported clause of type ${queryType}`);
+        return { id: queryType, type: queryType + '?', name: '', children: [], isExpanded: true };
+      } else {
+        return null;
+      }
   }
 }
 
@@ -44,6 +48,8 @@ function parseBool(query: Object): Query {
       case 'must_not':
         return mustNot(parseBoolClauses(query[prop]));
       case 'filter':
+        // TODO support filter
+        return { id: prop, type: prop + '?', name: '', children: [], isExpanded: true }
       default:
         return null;
     }
