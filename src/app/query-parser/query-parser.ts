@@ -1,4 +1,4 @@
-import { match, bool, must, should, mustNot, nested, Query } from './node';
+import { match, term, range, bool, must, should, mustNot, nested, Query } from './node';
 
 export function parse(query: Object): Query {
   if (query instanceof Object && query.hasOwnProperty('query')) {
@@ -8,16 +8,20 @@ export function parse(query: Object): Query {
   }
 }
 
-function parseQuery(query: Object, i = 0): Query {
+function parseQuery(query: Object): Query {
   // a query should only have a single child
   const queryType = Object.getOwnPropertyNames(query)[0];
   switch (queryType) {
     case 'match':
       return parseMatch(query['match']);
+    case 'term':
+      return parseTerm(query['term']);
+    case 'range':
+      return parseRange(query['range']);
     case 'bool':
       return parseBool(query['bool']);
     case 'nested':
-    return parseNested(query['nested']);
+      return parseNested(query['nested']);
     default:
       console.log(`Ignoring unsupported clause of type ${queryType}`);
       return null;
@@ -72,16 +76,48 @@ function flatten(a: Object[], b: Object[]): Object[] {
 function parseMatch(query: Object): Query {
   const field = Object.getOwnPropertyNames(query)[0];
   let value: string;
-  let metadata = [];
+  let metadata = null;
   if (field && typeof query[field] === 'string') {
     value = query[field];
   } else if (field && query[field].hasOwnProperty('query')) {
     value = query[field]['query'];
-    metadata = Object.getOwnPropertyNames(query[field]).filter(k => k !== 'query').map(k => ({key: k, value: query[field][k]}));
+    metadata = parseMetadata(query[field]);
   } else {
     throw SyntaxError('Malformed match clause');
   }
   return match(field, value, metadata);
+}
+
+function parseTerm(query: Object): Query {
+  const field = Object.getOwnPropertyNames(query)[0];
+  let value: string;
+  let metadata = null;
+  if (field && typeof query[field] === 'string') {
+    value = query[field];
+  } else if (field && query[field].hasOwnProperty('value')) {
+    value = query[field]['value'];
+    metadata = parseMetadata(query[field]);
+  } else {
+    throw SyntaxError('Malformed term clause');
+  }
+  return term(field, value, metadata);
+}
+
+function parseRange(query: Object): Query {
+  const field = Object.getOwnPropertyNames(query)[0];
+  const lt: number = query[field]['lt'];
+  const lte: number = query[field]['lte'];
+  const gt: number = query[field]['gt'];
+  const gte: number = query[field]['gte'];
+  const metadata = parseMetadata(query[field]);
+  const lower = gt ? { value: gt, exclusive: true} : gte ? { value: gte, exclusive: false } : null;
+  const upper = lt ? { value: lt, exclusive: true} : lte ? { value: lte, exclusive: false } : null;
+  return range(field, lower, upper, metadata);
+}
+
+function parseMetadata(query: Object) {
+  const props = Object.getOwnPropertyNames(query).filter(k => !(query[k] instanceof Object)).map(k => ({key: k, value: query[k]}));
+  return props.length === 0 ? null : props;
 }
 
   // if (query instanceof Array) {
