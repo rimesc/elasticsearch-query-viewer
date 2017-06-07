@@ -35,7 +35,8 @@ function parseQuery(query: Object): Query {
 function parseNested(query: Object): Query {
   const path: string = query['path'];
   const nestedQuery = parseQuery(query['query']);
-  return nested(path, nestedQuery);
+  const metadata = parseMetadata(query);
+  return nested(path, nestedQuery, metadata);
 }
 
 function parseBool(query: Object): Query {
@@ -54,7 +55,8 @@ function parseBool(query: Object): Query {
         return null;
     }
   }).filter(x => x);
-  return bool(subClauses);
+  const metadata = parseMetadata(query);
+  return bool(subClauses, metadata);
 }
 
 function minimumShouldMatch(bool: Object): number {
