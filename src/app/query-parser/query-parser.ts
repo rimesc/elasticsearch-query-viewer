@@ -69,9 +69,9 @@ function minimumShouldMatch(bool: Object): number {
 
 function parseBoolClauses(clauses: Object): Query[] {
   if (clauses instanceof Array) {
-    return (clauses as Object[]).map((clause, i) => parseQuery(clause, i)).filter(x => x);
-  } else {
-    return [];
+    return (clauses as Object[]).map((clause, i) => parseQuery(clause)).filter(x => x);
+  } else if (clauses instanceof Object) {
+    return [parseQuery(clauses)].filter(x => x);
   }
 }
 
