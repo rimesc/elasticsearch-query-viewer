@@ -1,11 +1,11 @@
 <tree-root *ngIf="nodes" [nodes]="nodes" (updateData)="expandAll()">
   <ng-template #treeNodeTemplate let-node let-index="index">
     <ng-template #popContent>
-      <table><tr *ngFor="let item of node.data.metadata"><th>{{item.key}}:</th><td>{{item.value}}</td></tr></table>
+      <table class="metadata"><tr *ngFor="let item of node.data.metadata"><th>{{item.key}}</th><td>{{item.value}}</td></tr></table>
     </ng-template>
     <small><span class="query-badge">{{node.data.type}}</span></small>
-    <span *ngIf="node.data.metadata" [ngbPopover]="popContent" popoverTitle="{{node.data.type}}" triggers="mouseenter:mouseleave" container="body" placement="right">{{node.data.name}}</span>
-    <span *ngIf="!node.data.metadata">{{node.data.name}}</span>
+    <span>{{node.data.name}}</span>
+    <sup *ngIf="node.data.metadata" class="text-primary" [ngbPopover]="popContent" popoverTitle="{{node.data.type}}" triggers="mouseenter:mouseleave" container="body" placement="bottom">&#x2139;</sup>
   </ng-template>
 </tree-root>
 <p *ngIf="error" class="text-danger">{{error}}</p>

@@ -3,3 +3,14 @@
 body {
   padding-top: 2rem;
 }
+
+table.metadata {
+  th {
+    @extend .pr-2;
+    @extend .text-right;
+    border-right: 1px solid $gray-lighter;
+  }
+  td {
+    @extend .pl-2;
+  }
+}
