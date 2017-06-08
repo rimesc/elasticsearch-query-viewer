@@ -1,5 +1,6 @@
 import { Query } from './query';
 import { parse as parseBool } from './bool';
+import { parse as parseConstantScore } from './constantScore';
 import { parse as parseExists } from './exists';
 import { parse as parseHasChild } from './hasChild';
 import { parse as parseHasParent } from './hasParent';
@@ -10,6 +11,7 @@ import { parse as parseTerm } from './term';
 
 const parsers = {
   bool: parseBool,
+  constant_score: parseConstantScore,
   exists: parseExists,
   has_child: parseHasChild,
   has_parent: parseHasParent,
