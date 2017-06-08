@@ -1,6 +1,8 @@
 import { Query } from './query';
 import { parse as parseBool } from './bool';
 import { parse as parseExists } from './exists';
+import { parse as parseHasChild } from './hasChild';
+import { parse as parseHasParent } from './hasParent';
 import { parse as parseMatch } from './match';
 import { parse as parseNested } from './nested';
 import { parse as parseRange } from './range';
@@ -9,6 +11,8 @@ import { parse as parseTerm } from './term';
 const parsers = {
   bool: parseBool,
   exists: parseExists,
+  has_child: parseHasChild,
+  has_parent: parseHasParent,
   match: parseMatch,
   nested: parseNested,
   range: parseRange,
