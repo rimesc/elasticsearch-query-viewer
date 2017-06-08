@@ -1,5 +1,6 @@
 import { Query } from './query';
 import { parseMetadata } from './query-parser';
+import { id } from './util';
 
 export function parse(query: Object, parseChild: (child: Object) => Query): Query {
   const subClauses = Object.getOwnPropertyNames(query).map((prop, i) => {
@@ -45,7 +46,7 @@ function flatten(a: Object[], b: Object[]): Object[] {
 
 function bool(children: Query[], metadata?: any): Query {
   return {
-    id: 'bool',
+    id: id(),
     name: 'satisfies',
     type: 'bool',
     children: children,
@@ -56,7 +57,7 @@ function bool(children: Query[], metadata?: any): Query {
 
 function must(children: Query[]) {
   return {
-    id: 'must',
+    id: id(),
     name: 'all of',
     type: 'must',
     children: children,
@@ -66,7 +67,7 @@ function must(children: Query[]) {
 
 function should(children: Query[], minimumShouldMatch: number) {
   return {
-    id: 'should',
+    id: id(),
     name: (minimumShouldMatch > 0) ? `at least ${minimumShouldMatch} of` : 'preferably',
     type: 'should',
     children: children,
@@ -76,7 +77,7 @@ function should(children: Query[], minimumShouldMatch: number) {
 
 function mustNot(children: Query[]) {
   return {
-    id: 'must_not',
+    id: id(),
     name: 'none of',
     type: 'must_not',
     children: children,

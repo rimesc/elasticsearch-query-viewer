@@ -1,5 +1,6 @@
 import { Query } from './query';
 import { parseMetadata } from './query-parser';
+import { id } from './util';
 
 export function parse(query: Object, parseChild: (child: Object) => Query): Query {
   const field = Object.getOwnPropertyNames(query)[0];
@@ -18,7 +19,7 @@ export function parse(query: Object, parseChild: (child: Object) => Query): Quer
 
 function create(field: string, value: string, metadata?: any): Query {
   return {
-    id: field,
+    id: id(),
     type: 'term',
     name: `'${field}' contains '${value}'`,
     children: [],

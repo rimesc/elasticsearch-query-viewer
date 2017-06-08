@@ -1,5 +1,6 @@
 import { Query } from './query';
 import { parseMetadata } from './query-parser';
+import { id } from './util';
 
 export function parse(query: Object, parseChild: (child: Object) => Query): Query {
   const path: string = query['path'];
@@ -10,7 +11,7 @@ export function parse(query: Object, parseChild: (child: Object) => Query): Quer
 
 function create(path: string, query: Query, metadata?: any) {
   return {
-    id: 'nested',
+    id: id(),
     name: `has item at '${path}' that`,
     type: 'nested',
     children: [query],

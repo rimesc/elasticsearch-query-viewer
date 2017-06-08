@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 
-import { TreeNode } from 'angular-tree-component';
+import { TreeNode, TreeComponent } from 'angular-tree-component';
 
 import { parse } from '../query-parser/query-parser';
 
@@ -10,6 +10,9 @@ import { parse } from '../query-parser/query-parser';
   styleUrls: ['./query-tree.component.scss']
 })
 export class QueryTreeComponent {
+
+  @ViewChild(TreeComponent)
+  private tree: TreeComponent;
 
   nodes: any[];
 
@@ -28,6 +31,12 @@ export class QueryTreeComponent {
         this.nodes = null;
         this.error = error;
       }
+    }
+  }
+
+  expandAll() {
+    if (this.tree && this.tree.treeModel) {
+      this.tree.treeModel.expandAll();
     }
   }
 
