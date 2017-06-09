@@ -18,7 +18,7 @@ export function parse(query: Object, parseChild: (child: Object) => Query): Quer
 function create(type: string, childQuery: Query, metadata?: any): Query {
   return {
     id: id(),
-    name: `has a child of type <code>${type}</code> that satisfies`,
+    name: `has a child of type <code>${type}</code> that` + (childQuery.type === 'bool' ? '' : ' satisfies'),
     type: 'has_child',
     children: [childQuery],
     metadata: metadata,

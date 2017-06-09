@@ -68,7 +68,7 @@ function must(children: Query[]) {
 function should(children: Query[], minimumShouldMatch: number) {
   return {
     id: id(),
-    name: (minimumShouldMatch > 0) ? `at least ${minimumShouldMatch} of` : 'preferably',
+    name: (minimumShouldMatch > 0) ? `at least ${minimumShouldMatch} of` : 'zero or more of',
     type: 'should',
     children: children,
     isExpanded: true
