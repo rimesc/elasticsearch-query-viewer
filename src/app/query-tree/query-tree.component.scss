@@ -10,5 +10,25 @@
   @extend .badge;
   @extend .badge-default;
   @extend .badge-pill;
-  opacity: 0.33;
+  opacity: .8;
+}
+
+.query-badge-bool, .query-badge-nested, .query-badge-has_child, .query-badge-has_parent {
+  @extend .badge-info;
+}
+
+.query-badge-must {
+  @extend .badge-success;
+}
+
+.query-badge-should {
+  @extend .badge-warning;
+}
+
+.query-badge-must_not {
+  @extend .badge-danger;
+}
+
+.query-badge-match, .query-badge-range, .query-badge-exists, .query-badge-term {
+  @extend .badge-primary;
 }

@@ -21,7 +21,7 @@ function create(field: string, value: string, metadata?: any): Query {
   return {
     id: id(),
     type: 'match',
-    name: `'${field}' matches '${value}'`,
+    name: `<code>${field}</code> matches <q>${value}</q>`,
     children: [],
     metadata: metadata,
     isExpanded: false

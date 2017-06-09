@@ -15,7 +15,7 @@ function create(field: string, metadata?: any): Query {
   return {
     id: id(),
     type: 'exists',
-    name: `has a value for '${field}'`,
+    name: `has a value for <code>${field}</code>`,
     children: [],
     metadata: metadata,
     isExpanded: false

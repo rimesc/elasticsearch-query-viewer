@@ -12,7 +12,7 @@ export function parse(query: Object, parseChild: (child: Object) => Query): Quer
 function create(path: string, query: Query, metadata?: any) {
   return {
     id: id(),
-    name: `has item at '${path}' that`,
+    name: `has item at <code>${path}</code> that`,
     type: 'nested',
     children: [query],
     metadata: metadata,
