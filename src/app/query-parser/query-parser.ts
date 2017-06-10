@@ -36,6 +36,9 @@ export function parse(query: Object): Query {
 function parseQuery(query: Object): Query {
   // a query should only have a single child
   const queryType = Object.getOwnPropertyNames(query)[0];
+  if (!queryType) {
+    throw new SyntaxError('No query found');
+  }
   const parser: (query: Object, parseChild: (query: Object) => Query) => Query = parsers[queryType];
   if (parser) {
     return parser(query[queryType], parseQuery);
