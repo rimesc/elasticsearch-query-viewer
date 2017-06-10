@@ -56,3 +56,13 @@ export function parseMetadata(query: Object): { key: string, value: any }[] {
   const props = Object.getOwnPropertyNames(query).filter(k => !(query[k] instanceof Object)).map(k => ({key: k, value: query[k]}));
   return props.length === 0 ? null : props;
 }
+
+/**
+ * Extracts inner hits from a query clause. The inner hits is a list of key value pairs containing
+ * all the primitive-valued members of the inner hits clause.
+ * @param query The query clause.
+ */
+export function parseInnerHits(query: Object): { key: string, value: string }[] {
+  const innerHits = query['inner_hits'];
+  return innerHits ? parseMetadata(innerHits) : null;
+}

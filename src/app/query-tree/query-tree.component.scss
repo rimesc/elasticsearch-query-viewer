@@ -32,3 +32,25 @@
 .query-badge-match, .query-badge-range, .query-badge-exists, .query-badge-term {
   @extend .badge-primary;
 }
+
+table.metadata {
+  th {
+    @extend .pr-2;
+    @extend .text-right;
+  }
+  td {
+    @extend .pl-2;
+    border-left: $popover-border-width solid $popover-title-bg;
+  }
+  th[colspan="2"] {
+    padding-right: 0 !important;
+    p {
+      @extend .text-center;
+      background: $popover-title-bg;
+      border-top: $popover-border-width solid darken($popover-title-bg, 5%);
+      border-bottom: $popover-border-width solid darken($popover-title-bg, 5%);
+      margin: ($popover-content-padding-y) (-$popover-content-padding-x - $popover-border-width);
+      font-weight: $font-weight-bold;
+    }
+  }
+}

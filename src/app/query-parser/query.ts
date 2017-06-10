@@ -3,6 +3,7 @@ export interface Query {
   type?: string;
   name: string;
   children: Query[];
-  metadata?: any;
+  metadata?: any[];
+  innerHits?: any[];
   isExpanded: boolean;
 }

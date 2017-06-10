@@ -44,7 +44,7 @@ function flatten(a: Object[], b: Object[]): Object[] {
   return a.concat(b);
 }
 
-function bool(children: Query[], metadata?: any): Query {
+function bool(children: Query[], metadata?: any[]): Query {
   return {
     id: id(),
     name: 'satisfies',

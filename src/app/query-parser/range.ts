@@ -16,7 +16,7 @@ export function parse(query: Object, parseChild: (child: Object) => Query): Quer
 
 interface Bound { value: string; exclusive: boolean; }
 
-function create(field: string, lower: Bound, upper: Bound, metadata?: any): Query {
+function create(field: string, lower: Bound, upper: Bound, metadata?: any[]): Query {
   let name: string;
   if (!upper) {
     name = `<code>${field}</code> greater than ${lower.exclusive ? '' : 'or equal to '}${lower.value}`;

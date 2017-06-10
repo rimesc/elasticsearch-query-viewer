@@ -1,5 +1,5 @@
 import { Query } from './query';
-import { parseMetadata } from './query-parser';
+import { parseMetadata, parseInnerHits } from './query-parser';
 import { id } from './util';
 
 export function parse(query: Object, parseChild: (child: Object) => Query): Query {
@@ -12,16 +12,18 @@ export function parse(query: Object, parseChild: (child: Object) => Query): Quer
     throw SyntaxError('Malformed has_child query: missing member \'query\'');
   }
   const metadata = parseMetadata(query);
-  return create(type, parseChild(childQuery), metadata);
+  const innerHits = parseInnerHits(query);
+  return create(type, parseChild(childQuery), metadata, innerHits);
 }
 
-function create(type: string, childQuery: Query, metadata?: any): Query {
+function create(type: string, childQuery: Query, metadata?: any[], innerHits?: any[]): Query {
   return {
     id: id(),
     name: `has a child of type <code>${type}</code> that` + (childQuery.type === 'bool' ? '' : ' satisfies'),
     type: 'has_child',
     children: [childQuery],
     metadata: metadata,
+    innerHits: innerHits,
     isExpanded: true
   };
 }

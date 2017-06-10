@@ -17,7 +17,7 @@ export function parse(query: Object, parseChild: (child: Object) => Query): Quer
   return create(field, value, metadata);
 }
 
-function create(field: string, value: string, metadata?: any): Query {
+function create(field: string, value: string, metadata?: any[]): Query {
   return {
     id: id(),
     type: 'term',
