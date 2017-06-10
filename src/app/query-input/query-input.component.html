@@ -1,2 +1,4 @@
-<textarea id="query-input" class="form-control" rows="20" [(ngModel)]="queryText" placeholder="Enter your query here..."></textarea>
-<p *ngIf="error" class="text-danger">{{error}}</p>
+<div class="form-group" [ngClass]="{'has-danger': error, 'has-success': !error && queryText.trim().length > 0}">
+  <textarea id="query-input" class="form-control" [ngClass]="{'form-control-danger': error, 'form-control-success': !error && queryText.trim().length > 0}" rows="20" [(ngModel)]="queryText" placeholder="Enter your query here..."></textarea>
+  <div class="form-control-feedback"><span *ngIf="error">{{error}}</span></div>
+</div>

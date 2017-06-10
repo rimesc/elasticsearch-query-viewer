@@ -1,0 +1,9 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
+textarea {
+  width: 100%;
+}
+
+.form-control-success, .form-control-warning, .form-control-danger {
+  background-position: top  ($input-height / 4) right ($input-height / 4);
+}
