@@ -1,61 +1,18 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-
-const example = `{
-  "query": {
-    "nested": {
-      "query": {
-        "bool": {
-          "must": [
-            {
-              "match": {
-                "foo.A": "a"
-              }
-            }
-          ],
-          "should": [
-            {
-              "match": {
-                "foo.B": "b"
-              }
-            },
-            {
-              "match": {
-                "foo.C": "c"
-              }
-            }
-          ],
-          "must_not": [
-            {
-              "match": {
-                "foo.D": "d"
-              }
-            }
-          ],
-          "minimum_should_match": 1
-        }
-      },
-      "path": "foo"
-    }
-  }
-}`;
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-query-input',
   templateUrl: './query-input.component.html',
   styleUrls: ['./query-input.component.scss']
 })
-export class QueryInputComponent implements OnInit {
+export class QueryInputComponent {
 
   @Output()
   modified = new EventEmitter<any>(true);
 
   error: string;
 
-  private value: string;
-
-  ngOnInit() {
-    this.queryText = example; // TODO remove me
-  }
+  private value = '';
 
   get queryText() {
     return this.value;
@@ -63,7 +20,7 @@ export class QueryInputComponent implements OnInit {
 
   set queryText(queryText: string) {
     this.value = queryText;
-    if (queryText.trim()) {
+    if (queryText && queryText.trim()) {
       try {
         const query = JSON.parse(queryText);
         this.error = null;
