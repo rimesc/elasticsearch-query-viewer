@@ -31,6 +31,9 @@ export class QueryTreeComponent {
         this.nodes = null;
         this.error = error;
       }
+    } else {
+      this.error = null;
+      this.nodes = [];
     }
   }
 
