@@ -1,6 +1,6 @@
 # Elasticsearch Query Viewer
 
-A simple web application that accepts an Elasticsearch query as JSON and displays it as a simplified structural tree that attempts to capture the key features labels them with friendly descriptions.
+A simple web application that accepts an Elasticsearch query as JSON and displays it as a simplified structural tree that attempts to capture the key features and labels them with friendly descriptions.
 
 Only certain common types of query are currently supported.
 
