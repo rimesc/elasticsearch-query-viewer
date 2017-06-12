@@ -4,6 +4,7 @@ import { parse as parseConstantScore } from './constantScore';
 import { parse as parseExists } from './exists';
 import { parse as parseHasChild } from './hasChild';
 import { parse as parseHasParent } from './hasParent';
+import { parse as parseIds } from './ids';
 import { parse as parseMatch } from './match';
 import { parse as parseNested } from './nested';
 import { parse as parseRange } from './range';
@@ -15,6 +16,7 @@ const parsers = {
   exists: parseExists,
   has_child: parseHasChild,
   has_parent: parseHasParent,
+  ids: parseIds,
   match: parseMatch,
   nested: parseNested,
   range: parseRange,

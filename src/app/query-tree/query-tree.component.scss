@@ -29,7 +29,7 @@
   @extend .badge-danger;
 }
 
-.query-badge-match, .query-badge-range, .query-badge-exists, .query-badge-term {
+.query-badge-match, .query-badge-range, .query-badge-exists, .query-badge-term, .query-badge-ids {
   @extend .badge-primary;
 }
 
