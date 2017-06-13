@@ -9,6 +9,7 @@ import { parse as parseMatch } from './match';
 import { parse as parseNested } from './nested';
 import { parse as parseRange } from './range';
 import { parse as parseTerm } from './term';
+import { parse as parseFallback } from './fallback';
 
 const parsers = {
   bool: parseBool,
@@ -45,8 +46,8 @@ function parseQuery(query: Object): Query {
   if (parser) {
     return parser(query[queryType], parseQuery);
   } else if (query[queryType] instanceof Object) {
-    console.log(`Ignoring unsupported clause of type ${queryType}`);
-    return { id: queryType, type: queryType + '?', name: '', children: [], isExpanded: true };
+    console.log(`Falling back for unsupported clause of type ${queryType}`);
+    return parseFallback(queryType, query[queryType], parseQuery);
   } else {
     return null;
   }
