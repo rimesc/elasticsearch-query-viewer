@@ -22,7 +22,7 @@ function create(types?: string | string[], values?: string[], metadata?: any[]):
 
 function label(types?: string | string[], values?: string[]) {
   // an empty list of IDs is technically legal but matches nothing
-  let label = values && values.length > 0 ? `has ID ${formatList(values, t => `'${t}'`)}` : 'has no ID';
+  let label = values && values.length > 0 ? `has ID ${formatList(values, t => `<q>${t}</q>`)}` : 'has no ID';
   if (types) {
     label += ` and is of type ${formatList(types, t => `<code>${t}</code>`)}`;
   }
