@@ -21,7 +21,7 @@ function create(field: string, value: string, metadata?: any[]): Query {
   return {
     id: id(),
     type: 'term',
-    name: `'${field}' contains '${value}'`,
+    name: `<code>${field}</code> contains <q>${value}</q>`,
     children: [],
     metadata: metadata,
     isExpanded: false
